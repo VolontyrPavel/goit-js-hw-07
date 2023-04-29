@@ -7,12 +7,6 @@ const cardImg = createGalleryCard (galleryItems);
 
 container.insertAdjacentHTML('beforeend', cardImg);
 
-// відключення поведінки за замовчуванням
-container.addEventListener('click', e => {
-    e.preventDefault();
-    whenClickImg(e);
-});
-
 // функція створення розмітки
 function createGalleryCard (galleryItems) {
     
@@ -32,6 +26,12 @@ function createGalleryCard (galleryItems) {
     }).join('');
 };
 
+// відключення поведінки за замовчуванням
+container.addEventListener('click', e => {
+    e.preventDefault();
+    whenClickImg(e);
+});
+
 // функція перевірки на місклік та виклику модального вікна
 function whenClickImg(e) {
     const checkingForMissClick = e.target.classList.contains('gallery__image');
@@ -45,14 +45,14 @@ function whenClickImg(e) {
 // створення модального вікна
 function callModalWindow (e) {
     
-    const modalWindow = basicLightbox.create(`<img src="${e.target.getAttribute('data-source')}" 
+    const instance = basicLightbox.create(`<img src="${e.target.getAttribute('data-source')}" 
     width="800" height="600">`);
-    modalWindow.show();
+    instance.show();
 
     document.addEventListener("keydown", e => {
         if (e.key === 'Escape') {
-            modalWindow.close();
+            instance.close();
         }
-    })
+    }, {once: true})
 };
 

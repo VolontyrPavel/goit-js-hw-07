@@ -9,12 +9,6 @@ const cardImg = createGalleryCard (galleryItems);
 
 container.insertAdjacentHTML('beforeend', cardImg);
 
-// відключення поведінки за замовчуванням
-container.addEventListener('click', e => {
-    e.preventDefault();
-    whenClickImg(e);
-});
-
 // функція створення розмітки
 function createGalleryCard (galleryItems) {
     
@@ -32,20 +26,6 @@ function createGalleryCard (galleryItems) {
         `
     }).join('');
 };
-
-// функція перевірки на місклік та виклику модального вікна
-function whenClickImg(e) {
-    const checkingForMissClick = e.target.classList.contains('gallery__image');
-    if(!checkingForMissClick) {
-        return;
-    }
     
-    callModalWindow(e);
-}
-
-// створення модального вікна
-function callModalWindow (e) {
-    
-    const modalWindow = new SimpleLightbox('.gallery a', { captionsData: "alt", captionDelay: 250 });
-};
+const lightbox = new SimpleLightbox('.gallery a', { captionsData: "alt", captionDelay: 250 });
 
